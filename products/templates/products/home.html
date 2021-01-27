@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<main>
+
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Hunt for the Game</h1>
+          <p class="lead text-muted">Find the game you like, play it, submit your review and vote for other reviews</p>
+          <p>
+            <a href="{% url 'create' %}" class="btn btn-primary my-2">Review the game</a>
+            
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <div class="album py-5 bg-light">
+        <div class="container">
+    
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+{% for product in products.all %}
+
+<div class="col" onclick="window.location='{% url 'detail' product.id %}';" style="cursor: pointer;">
+    <div class="card shadow-sm">
+      <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ product.image.url }}">
+
+      <div class="card-body">
+        <p class="card-text"><h5>{{ product.title }}</h5>
+           <p>{{ product.summary }}<a href="{% url 'detail' product.id %}"> Read more...</a> </p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+           
+          </div>
+          <small class="text-muted">{{ product.pub_date_pretty }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endfor %}
+</div>
+</div>
+</div>
+
+</main>
+{% endblock %}
